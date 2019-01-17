@@ -53,7 +53,7 @@
           </Key>
           <Property Name="SOCIEDAD_ID" Type="nchar" MaxLength="4" Nullable="false" />
           <Property Name="CLAVE" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="CUENTA_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="CUENTA_ID" Type="numeric" Precision="10" Scale="0" Nullable="false" />
           <Property Name="NOMBRE1" Type="nvarchar" MaxLength="20" />
           <Property Name="NOMBRE2" Type="nvarchar" MaxLength="50" />
           <Property Name="ACTIVO" Type="bit" />
@@ -954,7 +954,7 @@
           </Key>
           <Property Name="SOCIEDAD_ID" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="true" />
           <Property Name="CLAVE" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="CUENTA_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CUENTA_ID" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
           <Property Name="NOMBRE1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="NOMBRE2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ACTIVO" Type="Boolean" />
@@ -1200,7 +1200,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />

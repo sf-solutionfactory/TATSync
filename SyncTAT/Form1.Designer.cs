@@ -54,16 +54,16 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtArchivo = new System.Windows.Forms.TextBox();
             this.btnExaminarP = new System.Windows.Forms.Button();
+            this.chkCerrar = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dudSegundos)).BeginInit();
             this.SuspendLayout();
             // 
             // btnExaminarS
             // 
-            this.btnExaminarS.Location = new System.Drawing.Point(748, 62);
-            this.btnExaminarS.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExaminarS.Location = new System.Drawing.Point(561, 50);
             this.btnExaminarS.Name = "btnExaminarS";
-            this.btnExaminarS.Size = new System.Drawing.Size(100, 28);
+            this.btnExaminarS.Size = new System.Drawing.Size(75, 23);
             this.btnExaminarS.TabIndex = 3;
             this.btnExaminarS.Text = "Examinar";
             this.btnExaminarS.UseVisualStyleBackColor = true;
@@ -71,18 +71,16 @@
             // 
             // txtArchivoS
             // 
-            this.txtArchivoS.Location = new System.Drawing.Point(199, 64);
-            this.txtArchivoS.Margin = new System.Windows.Forms.Padding(4);
+            this.txtArchivoS.Location = new System.Drawing.Point(149, 52);
             this.txtArchivoS.Name = "txtArchivoS";
-            this.txtArchivoS.Size = new System.Drawing.Size(539, 22);
+            this.txtArchivoS.Size = new System.Drawing.Size(405, 20);
             this.txtArchivoS.TabIndex = 2;
             // 
             // btnCargar
             // 
-            this.btnCargar.Location = new System.Drawing.Point(748, 133);
-            this.btnCargar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCargar.Location = new System.Drawing.Point(561, 108);
             this.btnCargar.Name = "btnCargar";
-            this.btnCargar.Size = new System.Drawing.Size(100, 28);
+            this.btnCargar.Size = new System.Drawing.Size(75, 23);
             this.btnCargar.TabIndex = 12;
             this.btnCargar.Text = "Cargar";
             this.btnCargar.UseVisualStyleBackColor = true;
@@ -91,10 +89,9 @@
             // btnGuardar
             // 
             this.btnGuardar.Enabled = false;
-            this.btnGuardar.Location = new System.Drawing.Point(856, 133);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGuardar.Location = new System.Drawing.Point(642, 108);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(100, 28);
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 13;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -107,20 +104,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 139);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(19, 113);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 17);
+            this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "Usuario";
             // 
             // txtUsuario
             // 
             this.txtUsuario.Enabled = false;
-            this.txtUsuario.Location = new System.Drawing.Point(90, 136);
-            this.txtUsuario.Margin = new System.Windows.Forms.Padding(4);
+            this.txtUsuario.Location = new System.Drawing.Point(68, 110);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(132, 22);
+            this.txtUsuario.Size = new System.Drawing.Size(100, 20);
             this.txtUsuario.TabIndex = 8;
             // 
             // menuStrip1
@@ -130,8 +125,7 @@
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1200, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(900, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -142,7 +136,7 @@
             this.guardarConfiguracionToolStripMenuItem,
             this.configuracionDeCorreoToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(83, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(69, 20);
             this.toolStripMenuItem1.Text = "Opciones";
             // 
             // configuracionDeConexionBDToolStripMenuItem
@@ -150,7 +144,7 @@
             this.configuracionDeConexionBDToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.configuracionDeConexionBDToolStripMenuItem.Name = "configuracionDeConexionBDToolStripMenuItem";
             this.configuracionDeConexionBDToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.configuracionDeConexionBDToolStripMenuItem.Size = new System.Drawing.Size(340, 26);
+            this.configuracionDeConexionBDToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
             this.configuracionDeConexionBDToolStripMenuItem.Text = "Configuración de Conexión BD";
             this.configuracionDeConexionBDToolStripMenuItem.Click += new System.EventHandler(this.configuracionDeConexionBDToolStripMenuItem_Click);
             // 
@@ -158,7 +152,7 @@
             // 
             this.guardarConfiguracionToolStripMenuItem.Name = "guardarConfiguracionToolStripMenuItem";
             this.guardarConfiguracionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.guardarConfiguracionToolStripMenuItem.Size = new System.Drawing.Size(340, 26);
+            this.guardarConfiguracionToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
             this.guardarConfiguracionToolStripMenuItem.Text = "Guardar Configuración";
             this.guardarConfiguracionToolStripMenuItem.Click += new System.EventHandler(this.guardarConfiguracionToolStripMenuItem_Click);
             // 
@@ -166,34 +160,31 @@
             // 
             this.configuracionDeCorreoToolStripMenuItem.Name = "configuracionDeCorreoToolStripMenuItem";
             this.configuracionDeCorreoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.configuracionDeCorreoToolStripMenuItem.Size = new System.Drawing.Size(340, 26);
+            this.configuracionDeCorreoToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
             this.configuracionDeCorreoToolStripMenuItem.Text = "Configuración de Correo";
             this.configuracionDeCorreoToolStripMenuItem.Click += new System.EventHandler(this.configuracionDeCorreoToolStripMenuItem_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(240, 139);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(180, 113);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 17);
+            this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "Archivo Log";
             // 
             // txtArchivoL
             // 
-            this.txtArchivoL.Location = new System.Drawing.Point(331, 136);
-            this.txtArchivoL.Margin = new System.Windows.Forms.Padding(4);
+            this.txtArchivoL.Location = new System.Drawing.Point(248, 110);
             this.txtArchivoL.Name = "txtArchivoL";
-            this.txtArchivoL.Size = new System.Drawing.Size(288, 22);
+            this.txtArchivoL.Size = new System.Drawing.Size(217, 20);
             this.txtArchivoL.TabIndex = 10;
             // 
             // btnExaminarL
             // 
-            this.btnExaminarL.Location = new System.Drawing.Point(627, 133);
-            this.btnExaminarL.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExaminarL.Location = new System.Drawing.Point(470, 108);
             this.btnExaminarL.Name = "btnExaminarL";
-            this.btnExaminarL.Size = new System.Drawing.Size(100, 28);
+            this.btnExaminarL.Size = new System.Drawing.Size(75, 23);
             this.btnExaminarL.TabIndex = 11;
             this.btnExaminarL.Text = "Examinar";
             this.btnExaminarL.UseVisualStyleBackColor = true;
@@ -211,15 +202,14 @@
             0,
             0,
             0});
-            this.dudSegundos.Location = new System.Drawing.Point(1021, 64);
-            this.dudSegundos.Margin = new System.Windows.Forms.Padding(4);
+            this.dudSegundos.Location = new System.Drawing.Point(766, 52);
             this.dudSegundos.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.dudSegundos.Name = "dudSegundos";
-            this.dudSegundos.Size = new System.Drawing.Size(47, 22);
+            this.dudSegundos.Size = new System.Drawing.Size(35, 20);
             this.dudSegundos.TabIndex = 17;
             this.dudSegundos.Value = new decimal(new int[] {
             10,
@@ -230,20 +220,18 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(856, 66);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(642, 54);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(158, 17);
+            this.label3.Size = new System.Drawing.Size(118, 13);
             this.label3.TabIndex = 18;
             this.label3.Text = "Seg. para Auto Cerrado";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 69);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(31, 56);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(146, 17);
+            this.label4.Size = new System.Drawing.Size(112, 13);
             this.label4.TabIndex = 19;
             this.label4.Text = "Ruta de archivos SAP";
             // 
@@ -252,49 +240,55 @@
             this.textBoxLog.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.textBoxLog.Font = new System.Drawing.Font("Arial Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxLog.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.textBoxLog.Location = new System.Drawing.Point(20, 182);
-            this.textBoxLog.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxLog.Location = new System.Drawing.Point(15, 148);
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ReadOnly = true;
             this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxLog.Size = new System.Drawing.Size(1163, 292);
+            this.textBoxLog.Size = new System.Drawing.Size(873, 238);
             this.textBoxLog.TabIndex = 20;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(41, 98);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(31, 80);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(146, 34);
+            this.label5.Size = new System.Drawing.Size(112, 26);
             this.label5.TabIndex = 21;
             this.label5.Text = "Ruta de archivos SAP\r\n(Procesados)";
             // 
             // txtArchivo
             // 
-            this.txtArchivo.Location = new System.Drawing.Point(199, 98);
-            this.txtArchivo.Margin = new System.Windows.Forms.Padding(4);
+            this.txtArchivo.Location = new System.Drawing.Point(149, 80);
             this.txtArchivo.Name = "txtArchivo";
-            this.txtArchivo.Size = new System.Drawing.Size(539, 22);
+            this.txtArchivo.Size = new System.Drawing.Size(405, 20);
             this.txtArchivo.TabIndex = 22;
             // 
             // btnExaminarP
             // 
-            this.btnExaminarP.Location = new System.Drawing.Point(748, 98);
-            this.btnExaminarP.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExaminarP.Location = new System.Drawing.Point(561, 80);
             this.btnExaminarP.Name = "btnExaminarP";
-            this.btnExaminarP.Size = new System.Drawing.Size(100, 28);
+            this.btnExaminarP.Size = new System.Drawing.Size(75, 23);
             this.btnExaminarP.TabIndex = 23;
             this.btnExaminarP.Text = "Examinar";
             this.btnExaminarP.UseVisualStyleBackColor = true;
             this.btnExaminarP.Click += new System.EventHandler(this.btnExaminarP_Click);
             // 
+            // chkCerrar
+            // 
+            this.chkCerrar.AutoSize = true;
+            this.chkCerrar.Location = new System.Drawing.Point(808, 55);
+            this.chkCerrar.Name = "chkCerrar";
+            this.chkCerrar.Size = new System.Drawing.Size(15, 14);
+            this.chkCerrar.TabIndex = 24;
+            this.chkCerrar.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 490);
+            this.ClientSize = new System.Drawing.Size(900, 398);
+            this.Controls.Add(this.chkCerrar);
             this.Controls.Add(this.btnExaminarP);
             this.Controls.Add(this.txtArchivo);
             this.Controls.Add(this.label5);
@@ -314,7 +308,6 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Sincronización";
             this.menuStrip1.ResumeLayout(false);
@@ -351,6 +344,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtArchivo;
         private System.Windows.Forms.Button btnExaminarP;
+        private System.Windows.Forms.CheckBox chkCerrar;
     }
 }
 

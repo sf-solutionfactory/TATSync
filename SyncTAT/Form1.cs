@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClosedXML.Excel;
+using EntityFramework.BulkInsert.Extensions;
 using EqualityComparer;
 //Nuget Install-Package AutoClosingMessageBox
 namespace SyncTAT
@@ -17,6 +18,7 @@ namespace SyncTAT
     {
         static List<CLIENTE> CLIENTEs = new List<CLIENTE>();
         static List<CUENTAA> cUENTAAs = new List<CUENTAA>();
+        static List<CUENTAGL> cUENTAGLs = new List<CUENTAGL>();
         static List<UMEDIDA> uMEDIDAs = new List<UMEDIDA>();
         static List<UMEDIDAT> uMEDIDATs = new List<UMEDIDAT>();
         static List<PROVEEDOR> PROVEEDORs = new List<PROVEEDOR>();
@@ -48,6 +50,9 @@ namespace SyncTAT
                 {
                     cargaS(true);
                 }
+                dudSegundos.Value = set.IndexSegundos;
+                segundos = Convert.ToInt32(dudSegundos.Value) * 1000;
+                timer1.Interval = segundos;
                 timer1.Start();
             }
         }
@@ -121,6 +126,8 @@ namespace SyncTAT
             //if (set.FechaAnual != null) mtxtFecha.Text = set.FechaAnual.ToString("dd/MM/yyyy");
             dudSegundos.Value = set.IndexSegundos;
             segundos = Convert.ToInt32(dudSegundos.Value) * 1000;
+            bool ban = set.cerrar;
+            chkCerrar.Checked = ban;
         }
         private void guardarConfig()
         {
@@ -131,6 +138,7 @@ namespace SyncTAT
             //set.FechaAnual = Convert.ToDateTime(mtxtFecha.Text);
             set.IndexSegundos = Convert.ToInt32(dudSegundos.Value);
             segundos = Convert.ToInt32(dudSegundos.Value) * 1000;
+            set.cerrar = chkCerrar.Checked;
             set.Save();
         }
         private bool validarArchivoS()
@@ -169,8 +177,10 @@ namespace SyncTAT
         private void cargaACCO(StreamReader strem, string filename)
         {
             var cuentas = db.CUENTAA.ToList();
+            var cuentagls = db.CUENTAGL.ToList();
             GenericEqualityComparer<CUENTAA> pks = new GenericEqualityComparer<CUENTAA>((a1, a2) => a1.SOCIEDAD_ID == a2.SOCIEDAD_ID && a1.CLAVE == a2.CLAVE && a1.CUENTA_ID == a2.CUENTA_ID);
-        int nregistros = 0;
+            GenericEqualityComparer<CUENTAGL> pks1 = new GenericEqualityComparer<CUENTAGL>((a1, a2) => a1.ID == a2.ID);
+            int nregistros = 0;
             string[] lines;
             bool error = false;
             while (strem.Peek() > -1)
@@ -178,7 +188,22 @@ namespace SyncTAT
                 lines = strem.ReadLine().Split('|');
                 if (lines[0] != "" && lines[1] != "" && lines[2] != "")
                 {
-                    var existeregistro = cuentas.Where(t => t.SOCIEDAD_ID == lines[0] && t.CLAVE == lines[1] && t.CUENTA_ID == lines[2]).SingleOrDefault();
+                    decimal c = decimal.Parse(lines[2]);
+                    bool existeCta = cuentagls.Any(x => x.ID == c);
+                    if (!existeCta)
+                    {
+                        CUENTAGL cgl = new CUENTAGL();
+                        cgl.ID = c;
+                        cgl.NOMBRE = lines[4] != "" ? lines[4] : null;
+                        cgl.ACTIVO = true;
+                        if (!cUENTAGLs.Contains(cgl, pks1))
+                        {
+                            cUENTAGLs.Add(cgl);
+                            db.CUENTAGL.Add(cgl);
+                            db.SaveChanges();
+                        }
+                    }
+                    var existeregistro = cuentas.SingleOrDefault(t => t.SOCIEDAD_ID == lines[0] && t.CLAVE == lines[1] && t.CUENTA_ID == c);
                     if (existeregistro == null)
                     {
                         try
@@ -186,7 +211,7 @@ namespace SyncTAT
                             CUENTAA cuenta = new CUENTAA();
                             cuenta.SOCIEDAD_ID = lines[0];
                             cuenta.CLAVE = lines[1];
-                            cuenta.CUENTA_ID = lines[2];
+                            cuenta.CUENTA_ID = decimal.Parse(lines[2]);
                             cuenta.NOMBRE1 = lines[3] != "" ? lines[3] : null;
                             cuenta.NOMBRE2 = lines[4] != "" ? lines[4] : null;
                             cuenta.ACTIVO = lines[5] != "" ? Convert.ToBoolean(Convert.ToUInt16(lines[5])) : false;
@@ -1245,7 +1270,7 @@ namespace SyncTAT
                         {
                         catalogo = "Cuenta";
                             context.BulkInsert(cUENTAAs);
-                            grabarLog("Se insertaron " + cUENTAAs.Count + "registros a la tabla de ACCO.");
+                        grabarLog("Se insertaron " + cUENTAAs.Count + "registros a la tabla de ACCO.");
                             textBoxLog.Text += "Se insertaron " + cUENTAAs.Count + " registros a la tabla de ACCO." + Environment.NewLine;
                         }
                         for (int j = 0; j < files.Length; j++)
@@ -1414,24 +1439,25 @@ namespace SyncTAT
                 enviarInforme(true,catalogo);
             }
         }
-        //Menu
-        private string examinarRuta(string ruta)
-        {
-            string res = "";
-            openFileDialog1.Multiselect = false;
-            openFileDialog1.DefaultExt = "txt";
-            openFileDialog1.Filter = "Archivos de Excel (*.csv;*.CSV)|*.csv;*.CSV";
-            DialogResult result = openFileDialog1.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                res = @openFileDialog1.FileName;
-            }
-            else
-            {
-                res = ruta;
-            }
-            return res;
-        }
+        //////Menu
+        ////private string examinarRuta(string ruta)
+        ////{
+        ////    string res = "";
+        ////    openFileDialog1.Multiselect = false;
+        ////    openFileDialog1.DefaultExt = "txt";
+        ////    openFileDialog1.Filter = "Archivos de Excel (*.csv;*.CSV)|*.csv;*.CSV";
+        ////    DialogResult result = openFileDialog1.ShowDialog();
+        ////    if (result == DialogResult.OK)
+        ////    {
+        ////        res = @openFileDialog1.FileName;
+        ////    }
+        ////    else
+        ////    {
+        ////        res = ruta;
+        ////    }
+        ////    return res;
+        ////}
+
         private string examinarRutaC(string ruta)
         {
             string res = "";
@@ -1490,7 +1516,10 @@ namespace SyncTAT
         private void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Stop();
-            ////Close();
+            if (chkCerrar.Checked)
+            {
+                Close();
+            }
         }
 
     }

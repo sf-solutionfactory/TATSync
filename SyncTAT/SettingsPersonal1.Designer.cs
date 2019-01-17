@@ -106,7 +106,22 @@ namespace SyncTAT {
                 this["IndexSegundos"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public bool cerrar
+        {
+            get
+            {
+                return ((bool)(this["cerrar"]));
+            }
+            set
+            {
+                this["cerrar"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public global::System.DateTime FechaAnual {
