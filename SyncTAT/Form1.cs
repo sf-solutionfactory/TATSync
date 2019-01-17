@@ -35,7 +35,7 @@ namespace SyncTAT
         static List<MATERIALGP> mATERIALGPs = new List<MATERIALGP>();
         static List<MATERIALGPT> mATERIALGPTs = new List<MATERIALGPT>();
         Entities db = new Entities();
-        SettingsPersonal set = new SettingsPersonal();        
+        SettingsPersonal set = new SettingsPersonal();
         string rutaL = "";
         String logarchivos = "";
         int segundos = 0;
@@ -46,7 +46,7 @@ namespace SyncTAT
             DialogResult res = AutoClosingMessageBox.Show("Iniciar sincronización automática", "Inicio de sincronización automática", 5000, MessageBoxButtons.YesNo, DialogResult.OK);
             if (res == DialogResult.Yes)
             {
-                if (!String.IsNullOrEmpty(txtArchivoS.Text)&& !String.IsNullOrEmpty(txtArchivo.Text))
+                if (!String.IsNullOrEmpty(txtArchivoS.Text) && !String.IsNullOrEmpty(txtArchivo.Text))
                 {
                     cargaS(true);
                 }
@@ -72,7 +72,7 @@ namespace SyncTAT
         private void btnCargar_Click(object sender, EventArgs e)
         {
             textBoxLog.ResetText();
-            if (!String.IsNullOrEmpty(txtArchivoS.Text)&& !String.IsNullOrEmpty(txtArchivo.Text))
+            if (!String.IsNullOrEmpty(txtArchivoS.Text) && !String.IsNullOrEmpty(txtArchivo.Text))
             {
                 cargaS(false);
             }
@@ -148,16 +148,16 @@ namespace SyncTAT
                 DirectoryInfo files = new DirectoryInfo(txtArchivoS.Text);
                 if (files.Exists)
                 {
-                        if (String.IsNullOrEmpty(txtArchivoL.Text) == false)                            
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            AutoClosingMessageBox.Show("Agrege la carpeta contenedora del log", "Error de directorio", segundos, MessageBoxButtons.OK, DialogResult.OK);
-                            grabarLog("Agrege la carpeta contenedora del log");
-                            return false;
-                        }
+                    if (String.IsNullOrEmpty(txtArchivoL.Text) == false)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        AutoClosingMessageBox.Show("Agrege la carpeta contenedora del log", "Error de directorio", segundos, MessageBoxButtons.OK, DialogResult.OK);
+                        grabarLog("Agrege la carpeta contenedora del log");
+                        return false;
+                    }
                 }
                 else
                 {
@@ -178,6 +178,7 @@ namespace SyncTAT
         {
             var cuentas = db.CUENTAA.ToList();
             var cuentagls = db.CUENTAGL.ToList();
+            cUENTAGLs = new List<CUENTAGL>();
             GenericEqualityComparer<CUENTAA> pks = new GenericEqualityComparer<CUENTAA>((a1, a2) => a1.SOCIEDAD_ID == a2.SOCIEDAD_ID && a1.CLAVE == a2.CLAVE && a1.CUENTA_ID == a2.CUENTA_ID);
             GenericEqualityComparer<CUENTAGL> pks1 = new GenericEqualityComparer<CUENTAGL>((a1, a2) => a1.ID == a2.ID);
             int nregistros = 0;
@@ -189,7 +190,7 @@ namespace SyncTAT
                 if (lines[0] != "" && lines[1] != "" && lines[2] != "")
                 {
                     decimal c = decimal.Parse(lines[2]);
-                    bool existeCta = cuentagls.Any(x => x.ID == c);
+                    bool existeCta = cuentagls.Any(x => x.ID == c) || cUENTAGLs.Any(x=>x.ID == c);
                     if (!existeCta)
                     {
                         CUENTAGL cgl = new CUENTAGL();
@@ -199,10 +200,21 @@ namespace SyncTAT
                         if (!cUENTAGLs.Contains(cgl, pks1))
                         {
                             cUENTAGLs.Add(cgl);
-                            db.CUENTAGL.Add(cgl);
-                            db.SaveChanges();
                         }
                     }
+                }
+            }
+            if (cUENTAGLs.Count > 0)
+                db.BulkInsert(cUENTAGLs);
+
+            strem.BaseStream.Position = 0;
+            strem.DiscardBufferedData();
+            while (strem.Peek() > -1)
+            {
+                lines = strem.ReadLine().Split('|');
+                if (lines[0] != "" && lines[1] != "" && lines[2] != "")
+                {
+                    decimal c = decimal.Parse(lines[2]);
                     var existeregistro = cuentas.SingleOrDefault(t => t.SOCIEDAD_ID == lines[0] && t.CLAVE == lines[1] && t.CUENTA_ID == c);
                     if (existeregistro == null)
                     {
@@ -215,7 +227,7 @@ namespace SyncTAT
                             cuenta.NOMBRE1 = lines[3] != "" ? lines[3] : null;
                             cuenta.NOMBRE2 = lines[4] != "" ? lines[4] : null;
                             cuenta.ACTIVO = lines[5] != "" ? Convert.ToBoolean(Convert.ToUInt16(lines[5])) : false;
-                            if (!cUENTAAs.Contains(cuenta,pks))
+                            if (!cUENTAAs.Contains(cuenta, pks))
                             {
                                 cUENTAAs.Add(cuenta);
                                 nregistros++;
@@ -254,9 +266,9 @@ namespace SyncTAT
             while (strem.Peek() > -1)
             {
                 lines = strem.ReadLine().Split('|');
-                if (lines[0] != ""&&lines[1] != ""&&lines[2] != ""&& lines[3] != "")
+                if (lines[0] != "" && lines[1] != "" && lines[2] != "" && lines[3] != "")
                 {
-                    var existeregistro = paises.Where(t => t.VKORG == lines[0] && t.VTWEG==lines[1] && t.SPART == lines[2] && t.KUNNR == lines[3]).SingleOrDefault();
+                    var existeregistro = paises.Where(t => t.VKORG == lines[0] && t.VTWEG == lines[1] && t.SPART == lines[2] && t.KUNNR == lines[3]).SingleOrDefault();
                     if (existeregistro == null)
                     {
                         try
@@ -326,7 +338,7 @@ namespace SyncTAT
             var paises = db.SOCIEDAD.ToList();
             int nuevor = 0;
             string[] lines;
-            bool error=false;
+            bool error = false;
             while (strem.Peek() > -1)
             {
                 lines = strem.ReadLine().Split('|');
@@ -484,7 +496,7 @@ namespace SyncTAT
             while (strem.Peek() > -1)
             {
                 lines = strem.ReadLine().Split('|');
-                if (lines[0] != ""&& lines[1] != ""&& lines[2] != ""&& lines[3] != "")
+                if (lines[0] != "" && lines[1] != "" && lines[2] != "" && lines[3] != "")
                 {
                     var fecha = new DateTime(Convert.ToInt16(lines[3].Substring(0, 4)), Convert.ToInt16(lines[3].Substring(4, 2)), Convert.ToInt16(lines[3].Substring(6, 2)));
                     var existeregistro = paises.Where(t => t.KURST.TrimEnd() == lines[0] && t.FCURR == lines[1] && t.TCURR == lines[2] && t.GDATU == fecha).SingleOrDefault();
@@ -536,7 +548,7 @@ namespace SyncTAT
                 lines = strem.ReadLine().Split('|');
                 if (lines[0] != "")
                 {
-                    var existeregistro=paises.Where(t => t.LAND == lines[0]).SingleOrDefault();
+                    var existeregistro = paises.Where(t => t.LAND == lines[0]).SingleOrDefault();
                     if (existeregistro == null)
                     {
                         try
@@ -563,7 +575,7 @@ namespace SyncTAT
                 }
                 else
                 {
-                    grabarLog("Un registro en el archivo "+filename+", no tiene el formato requerido.");
+                    grabarLog("Un registro en el archivo " + filename + ", no tiene el formato requerido.");
                     error = true;
                 }
             }
@@ -601,7 +613,7 @@ namespace SyncTAT
                             material.MAKTX = lines[3] != "" ? lines[3] : null;
                             material.MAKTG = lines[4] != "" ? lines[4] : null;
                             material.MEINS = lines[5] != "" ? lines[5] : null;
-                            material.PUNIT = lines[6] != "" ?Convert.ToDecimal(lines[6]) : 0;
+                            material.PUNIT = lines[6] != "" ? Convert.ToDecimal(lines[6]) : 0;
                             material.ACTIVO = lines[7] != "" ? Convert.ToBoolean(Convert.ToInt16(lines[7])) : false;
                             material.CTGR = lines[8] != "" ? lines[8] : null;
                             material.BRAND = lines[9] != "" ? lines[9] : null;
@@ -691,9 +703,9 @@ namespace SyncTAT
             while (strem.Peek() > -1)
             {
                 lines = strem.ReadLine().Split('|');
-                if (lines[0] != ""&& lines[1] != ""&& lines[2] != "")
+                if (lines[0] != "" && lines[1] != "" && lines[2] != "")
                 {
-                    var existeregistro = paises.Where(t => t.MATERIAL_ID == lines[0]&& t.VKORG == lines[1]&& t.VTWEG.TrimEnd() == lines[2]).SingleOrDefault();
+                    var existeregistro = paises.Where(t => t.MATERIAL_ID == lines[0] && t.VKORG == lines[1] && t.VTWEG.TrimEnd() == lines[2]).SingleOrDefault();
                     if (existeregistro == null)
                     {
                         try
@@ -703,11 +715,11 @@ namespace SyncTAT
                             material.VKORG = lines[1] != "" ? lines[1] : null;
                             material.VTWEG = lines[2] != "" ? lines[2] : null;
                             material.ACTIVO = lines[3] != "" ? Convert.ToBoolean(Convert.ToInt16(lines[3])) : false;
-                        //if (!paises.Contains(material, pks))
-                        //{
+                            //if (!paises.Contains(material, pks))
+                            //{
                             nuevor++;
                             mATERIALVKEs.Add(material);
-                        //}
+                            //}
                         }
                         catch (Exception e)
                         {
@@ -789,7 +801,7 @@ namespace SyncTAT
             while (strem.Peek() > -1)
             {
                 lines = strem.ReadLine().Split('|');
-                if (lines[0] != ""&& lines[1] != "")
+                if (lines[0] != "" && lines[1] != "")
                 {
                     var existeregistro = paises.Where(t => t.SPRAS_ID == lines[0] && t.MSEHI.TrimEnd() == lines[1]).SingleOrDefault();
                     if (existeregistro == null)
@@ -799,7 +811,7 @@ namespace SyncTAT
                             UMEDIDAT medida = new UMEDIDAT();
                             medida.SPRAS_ID = lines[0];
                             medida.MSEHI = lines[1];
-                            medida.MSEH3 = lines[2]!=""?lines[2]:null;
+                            medida.MSEH3 = lines[2] != "" ? lines[2] : null;
                             medida.MSEH6 = lines[3] != "" ? lines[3] : null;
                             medida.MSEHT = lines[4] != "" ? lines[4] : null;
                             medida.MSEHL = lines[5] != "" ? lines[5] : null;
@@ -840,9 +852,9 @@ namespace SyncTAT
             while (strem.Peek() > -1)
             {
                 lines = strem.ReadLine().Split('|');
-                if (lines[0] != ""&& lines[1] != "")
+                if (lines[0] != "" && lines[1] != "")
                 {
-                    var existeregistro = paises.Where(t => t.LAND == lines[0]&& t.MWSKZ == lines[1]).SingleOrDefault();
+                    var existeregistro = paises.Where(t => t.LAND == lines[0] && t.MWSKZ == lines[1]).SingleOrDefault();
                     if (existeregistro == null)
                     {
                         try
@@ -851,7 +863,7 @@ namespace SyncTAT
                             iIMPUESTO.LAND = lines[0];
                             iIMPUESTO.MWSKZ = lines[1];
                             iIMPUESTO.KSCHL = lines[2] != "" ? lines[2] : null;
-                            iIMPUESTO.KBETR = lines[3] != "" ?Convert.ToDecimal(lines[3]) : 0;
+                            iIMPUESTO.KBETR = lines[3] != "" ? Convert.ToDecimal(lines[3]) : 0;
                             iIMPUESTO.ACTIVO = lines[4] != "" ? Convert.ToBoolean(Convert.ToInt16(lines[4])) : false;
                             if (!iIMPUESTOs.Contains(iIMPUESTO, pks))
                             {
@@ -901,7 +913,7 @@ namespace SyncTAT
                         {
                             MATERIALGP material = new MATERIALGP();
                             material.ID = lines[0];
-                            material.DESCRIPCION = lines[1]!=""?lines[1]:null;
+                            material.DESCRIPCION = lines[1] != "" ? lines[1] : null;
                             material.ACTIVO = lines[2] != "" ? Convert.ToBoolean(Convert.ToInt16(lines[2])) : false;
                             material.EXCLUIR = lines[3] != "" ? Convert.ToBoolean(Convert.ToInt16(lines[3])) : false;
                             material.UNICA = lines[4] != "" ? Convert.ToBoolean(Convert.ToInt16(lines[4])) : false;
@@ -1029,7 +1041,7 @@ namespace SyncTAT
         {
             logarchivos = "";
             crearLog();
-            grabarLog("Iniciando Sincronización con usuario "+ txtUsuario.Text);           
+            grabarLog("Iniciando Sincronización con usuario " + txtUsuario.Text);
             FileInfo file;
             //StreamReader strem;
             string[] nombre;
@@ -1044,7 +1056,7 @@ namespace SyncTAT
                     for (int j = 0; j < files.Length; j++)
                     {
                         file = new FileInfo(files[j]);
-                        nombre = file.Name.Split('_');                
+                        nombre = file.Name.Split('_');
                         grabarLog("Cargando datos del archivo " + file.Name);
                         using (StreamReader strem = new StreamReader(new FileStream(files[j], FileMode.Open, FileAccess.Read, FileShare.Read)))
                         {
@@ -1143,15 +1155,15 @@ namespace SyncTAT
                         btnGuardar.Enabled = true;
                     grabarLog("Datos extraídos");
                     textBoxLog.Text = logarchivos;
-                        if (automatico)
-                        {
-                            grabarLog("Carga terminada");
-                            guardarDatosTAT();
-                        }
-                        else
-                        {
-                            grabarLog("Carga terminada");
-                        }
+                    if (automatico)
+                    {
+                        grabarLog("Carga terminada");
+                        guardarDatosTAT();
+                    }
+                    else
+                    {
+                        grabarLog("Carga terminada");
+                    }
                 }
                 catch (Exception x)
                 {
@@ -1214,229 +1226,229 @@ namespace SyncTAT
                 using (var context = new Entities())
                 {
                     grabarLog("Iniciando GUARDADO DE DATOS a la base de datos");
-                        if (PAISs.Count > 0)
-                        {
+                    if (PAISs.Count > 0)
+                    {
                         catalogo = "País";
-                            context.BulkInsert(PAISs);
-                            grabarLog("Se insertaron " + PAISs.Count + "registros a la tabla de CNTY.");
-                            textBoxLog.Text += "Se insertaron " + PAISs.Count + " registros a la tabla de CNTY." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            if (file.Name.Contains("CNTY"))
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (SOCIEDADs.Count > 0)
-                        {
+                        context.BulkInsert(PAISs);
+                        grabarLog("Se insertaron " + PAISs.Count + "registros a la tabla de CNTY.");
+                        textBoxLog.Text += "Se insertaron " + PAISs.Count + " registros a la tabla de CNTY." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        if (file.Name.Contains("CNTY"))
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (SOCIEDADs.Count > 0)
+                    {
                         catalogo = "Sociedad";
-                            context.BulkInsert(SOCIEDADs);
-                            grabarLog("Se insertaron " + SOCIEDADs.Count + "registros a la tabla de COCO.");
-                            textBoxLog.Text += "Se insertaron " + SOCIEDADs.Count + " registros a la tabla de COCO." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            if (file.Name.Contains("COCO"))
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (PROVEEDORs.Count > 0)
-                        {
+                        context.BulkInsert(SOCIEDADs);
+                        grabarLog("Se insertaron " + SOCIEDADs.Count + "registros a la tabla de COCO.");
+                        textBoxLog.Text += "Se insertaron " + SOCIEDADs.Count + " registros a la tabla de COCO." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        if (file.Name.Contains("COCO"))
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (PROVEEDORs.Count > 0)
+                    {
                         catalogo = "Proveedor";
-                            context.BulkInsert(PROVEEDORs);
-                            grabarLog("Se insertaron " + PROVEEDORs.Count + "registros a la tabla de VENDOR.");
-                            textBoxLog.Text += "Se insertaron " + PROVEEDORs.Count + " registros a la tabla de VENDOR." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            if (file.Name.Contains("VENDOR"))
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (CLIENTEs.Count > 0)
-                        {
+                        context.BulkInsert(PROVEEDORs);
+                        grabarLog("Se insertaron " + PROVEEDORs.Count + "registros a la tabla de VENDOR.");
+                        textBoxLog.Text += "Se insertaron " + PROVEEDORs.Count + " registros a la tabla de VENDOR." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        if (file.Name.Contains("VENDOR"))
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (CLIENTEs.Count > 0)
+                    {
                         catalogo = "Cliente";
-                            context.BulkInsert(CLIENTEs);
-                            grabarLog("Se insertaron " + CLIENTEs.Count + "registros a la tabla de CUST.");
-                            textBoxLog.Text += "Se insertaron " + CLIENTEs.Count + " registros a la tabla de CUST." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            if (file.Name.Contains("CUST"))
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (cUENTAAs.Count > 0)
-                        {
+                        context.BulkInsert(CLIENTEs);
+                        grabarLog("Se insertaron " + CLIENTEs.Count + "registros a la tabla de CUST.");
+                        textBoxLog.Text += "Se insertaron " + CLIENTEs.Count + " registros a la tabla de CUST." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        if (file.Name.Contains("CUST"))
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (cUENTAAs.Count > 0)
+                    {
                         catalogo = "Cuenta";
-                            context.BulkInsert(cUENTAAs);
+                        context.BulkInsert(cUENTAAs);
                         grabarLog("Se insertaron " + cUENTAAs.Count + "registros a la tabla de ACCO.");
-                            textBoxLog.Text += "Se insertaron " + cUENTAAs.Count + " registros a la tabla de ACCO." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            if (file.Name.Contains("ACCO"))
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (MONEDAs.Count > 0)
-                        {
+                        textBoxLog.Text += "Se insertaron " + cUENTAAs.Count + " registros a la tabla de ACCO." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        if (file.Name.Contains("ACCO"))
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (MONEDAs.Count > 0)
+                    {
                         catalogo = "Moneda";
-                            context.BulkInsert(MONEDAs);
-                            grabarLog("Se insertaron " + MONEDAs.Count + "registros a la tabla de CURR.");
-                            textBoxLog.Text += "Se insertaron " + MONEDAs.Count + " registros a la tabla de CURR." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            if (file.Name.Contains("CURR"))
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (TCAMBIOs.Count > 0)
-                        {
+                        context.BulkInsert(MONEDAs);
+                        grabarLog("Se insertaron " + MONEDAs.Count + "registros a la tabla de CURR.");
+                        textBoxLog.Text += "Se insertaron " + MONEDAs.Count + " registros a la tabla de CURR." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        if (file.Name.Contains("CURR"))
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (TCAMBIOs.Count > 0)
+                    {
                         catalogo = "Tipo de Cambio";
-                            context.BulkInsert(TCAMBIOs);
-                            grabarLog("Se insertaron " + TCAMBIOs.Count + "registros a la tabla de EXCH.");
-                            textBoxLog.Text += "Se insertaron " + TCAMBIOs.Count + " registros a la tabla de EXCH." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            if (file.Name.Contains("EXCH"))
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (mATERIALGPs.Count > 0)
-                        {
+                        context.BulkInsert(TCAMBIOs);
+                        grabarLog("Se insertaron " + TCAMBIOs.Count + "registros a la tabla de EXCH.");
+                        textBoxLog.Text += "Se insertaron " + TCAMBIOs.Count + " registros a la tabla de EXCH." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        if (file.Name.Contains("EXCH"))
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (mATERIALGPs.Count > 0)
+                    {
                         catalogo = "Material Grupo";
-                            context.BulkInsert(mATERIALGPs);
-                            grabarLog("Se insertaron " + mATERIALGPs.Count + "registros a la tabla de MATGROUP.");
-                            textBoxLog.Text += "Se insertaron " + mATERIALGPs.Count + " registros a la tabla de MATGROUP." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            if (file.Name.Contains("MATGROUP"))
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (mATERIALGPTs.Count > 0)
-                        {
+                        context.BulkInsert(mATERIALGPs);
+                        grabarLog("Se insertaron " + mATERIALGPs.Count + "registros a la tabla de MATGROUP.");
+                        textBoxLog.Text += "Se insertaron " + mATERIALGPs.Count + " registros a la tabla de MATGROUP." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        if (file.Name.Contains("MATGROUP"))
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (mATERIALGPTs.Count > 0)
+                    {
                         catalogo = "Material Grupo";
-                            context.BulkInsert(mATERIALGPTs);
-                            grabarLog("Se insertaron " + mATERIALGPTs.Count + "registros a la tabla de MATG_TEXT.");
-                            textBoxLog.Text += "Se insertaron " + mATERIALGPTs.Count + " registros a la tabla de MATG_TEXT." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            if (file.Name.Contains("MATG_TEXT"))
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (mATERIALs.Count > 0)
-                        {
+                        context.BulkInsert(mATERIALGPTs);
+                        grabarLog("Se insertaron " + mATERIALGPTs.Count + "registros a la tabla de MATG_TEXT.");
+                        textBoxLog.Text += "Se insertaron " + mATERIALGPTs.Count + " registros a la tabla de MATG_TEXT." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        if (file.Name.Contains("MATG_TEXT"))
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (mATERIALs.Count > 0)
+                    {
                         catalogo = "Material";
-                            context.BulkInsert(mATERIALs);
-                            grabarLog("Se insertaron " + mATERIALs.Count + "registros a la tabla de MAT.");
-                            textBoxLog.Text += "Se insertaron " + mATERIALs.Count + " registros a la tabla de MAT." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            var filesplit = file.Name.Split('_');
-                            if (filesplit[1] == "MAT")
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (mATERIALTs.Count > 0)
-                        {
+                        context.BulkInsert(mATERIALs);
+                        grabarLog("Se insertaron " + mATERIALs.Count + "registros a la tabla de MAT.");
+                        textBoxLog.Text += "Se insertaron " + mATERIALs.Count + " registros a la tabla de MAT." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        var filesplit = file.Name.Split('_');
+                        if (filesplit[1] == "MAT")
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (mATERIALTs.Count > 0)
+                    {
                         catalogo = "Material";
-                            context.BulkInsert(mATERIALTs);
-                            grabarLog("Se insertaron " + mATERIALTs.Count + "registros a la tabla de MAKT.");
-                            textBoxLog.Text += "Se insertaron " + mATERIALTs.Count + " registros a la tabla de MAKT." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            if (file.Name.Contains("MAKT"))
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (mATERIALVKEs.Count > 0)
-                        {
+                        context.BulkInsert(mATERIALTs);
+                        grabarLog("Se insertaron " + mATERIALTs.Count + "registros a la tabla de MAKT.");
+                        textBoxLog.Text += "Se insertaron " + mATERIALTs.Count + " registros a la tabla de MAKT." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        if (file.Name.Contains("MAKT"))
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (mATERIALVKEs.Count > 0)
+                    {
                         catalogo = "Material MVKE";
-                            context.BulkInsert(mATERIALVKEs);
-                            grabarLog("Se insertaron " + mATERIALVKEs.Count + "registros a la tabla de MVKE.");
-                            textBoxLog.Text += "Se insertaron " + mATERIALVKEs.Count + " registros a la tabla de MVKE." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            if (file.Name.Contains("MVKE"))
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (iMPUESTOs.Count > 0)
-                        {
+                        context.BulkInsert(mATERIALVKEs);
+                        grabarLog("Se insertaron " + mATERIALVKEs.Count + "registros a la tabla de MVKE.");
+                        textBoxLog.Text += "Se insertaron " + mATERIALVKEs.Count + " registros a la tabla de MVKE." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        if (file.Name.Contains("MVKE"))
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (iMPUESTOs.Count > 0)
+                    {
                         catalogo = "Impuestos";
-                            context.BulkInsert(iMPUESTOs);
-                            grabarLog("Se insertaron " + iMPUESTOs.Count + "registros a la tabla de TAX_TEXT.");
-                            textBoxLog.Text += "Se insertaron " + iMPUESTOs.Count + " registros a la tabla de TAX_TEXT." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            var filesplit = file.Name.Split('_');
-                            if (filesplit[1] == "TAX" && filesplit[2] == "TEXT")
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (iIMPUESTOs.Count > 0)
-                        {
+                        context.BulkInsert(iMPUESTOs);
+                        grabarLog("Se insertaron " + iMPUESTOs.Count + "registros a la tabla de TAX_TEXT.");
+                        textBoxLog.Text += "Se insertaron " + iMPUESTOs.Count + " registros a la tabla de TAX_TEXT." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        var filesplit = file.Name.Split('_');
+                        if (filesplit[1] == "TAX" && filesplit[2] == "TEXT")
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (iIMPUESTOs.Count > 0)
+                    {
                         catalogo = "Impuestos";
-                            context.BulkInsert(iIMPUESTOs);
-                            grabarLog("Se insertaron " + iIMPUESTOs.Count + "registros a la tabla de TAX.");
-                            textBoxLog.Text += "Se insertaron " + iIMPUESTOs.Count + " registros a la tabla de TAX." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            var filesplit = file.Name.Split('_');
-                            if (filesplit[1] == "TAX" && filesplit.Length == 3)
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (uMEDIDAs.Count > 0)
-                        {
+                        context.BulkInsert(iIMPUESTOs);
+                        grabarLog("Se insertaron " + iIMPUESTOs.Count + "registros a la tabla de TAX.");
+                        textBoxLog.Text += "Se insertaron " + iIMPUESTOs.Count + " registros a la tabla de TAX." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        var filesplit = file.Name.Split('_');
+                        if (filesplit[1] == "TAX" && filesplit.Length == 3)
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (uMEDIDAs.Count > 0)
+                    {
                         catalogo = "Unidad de Medida";
-                            context.BulkInsert(uMEDIDAs);
-                            grabarLog("Se insertaron " + uMEDIDAs.Count + "registros a la tabla de UOM.");
-                            textBoxLog.Text += "Se insertaron " + uMEDIDAs.Count + " registros a la tabla de UOM." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            if (file.Name.Contains("UOM_S") || file.Name.Contains("UOM_E"))
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
-                        if (uMEDIDATs.Count > 0)
-                        {
+                        context.BulkInsert(uMEDIDAs);
+                        grabarLog("Se insertaron " + uMEDIDAs.Count + "registros a la tabla de UOM.");
+                        textBoxLog.Text += "Se insertaron " + uMEDIDAs.Count + " registros a la tabla de UOM." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        if (file.Name.Contains("UOM_S") || file.Name.Contains("UOM_E"))
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
+                    if (uMEDIDATs.Count > 0)
+                    {
                         catalogo = "Unidad de Medida";
-                            context.BulkInsert(uMEDIDATs);
-                            grabarLog("Se insertaron " + uMEDIDATs.Count + "registros a la tabla de UOM_TEXT.");
-                            textBoxLog.Text += "Se insertaron " + uMEDIDATs.Count + " registros a la tabla de UOM_TEXT." + Environment.NewLine;
-                        }
-                        for (int j = 0; j < files.Length; j++)
-                        {
-                            FileInfo file = new FileInfo(files[j]);
-                            if (file.Name.Contains("UOM_TEXTS") || file.Name.Contains("UOM_TEXTE"))
-                                file.MoveTo(txtArchivo.Text + "/" + file.Name);
-                        }
+                        context.BulkInsert(uMEDIDATs);
+                        grabarLog("Se insertaron " + uMEDIDATs.Count + "registros a la tabla de UOM_TEXT.");
+                        textBoxLog.Text += "Se insertaron " + uMEDIDATs.Count + " registros a la tabla de UOM_TEXT." + Environment.NewLine;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        FileInfo file = new FileInfo(files[j]);
+                        if (file.Name.Contains("UOM_TEXTS") || file.Name.Contains("UOM_TEXTE"))
+                            file.MoveTo(txtArchivo.Text + "/" + file.Name);
+                    }
                 }
                 guardarConfig();
                 AutoClosingMessageBox.Show("Guardado Correctamente", "Guardado", segundos, MessageBoxButtons.OK, DialogResult.OK);
                 grabarLog("Guardado Correctamente");
                 grabarLog("Fin");
-                enviarInforme(false,"");
+                enviarInforme(false, "");
             }
             catch (Exception e)
             {
                 AutoClosingMessageBox.Show("Ocurrio Algo al momento de guardar", "Error al Guardar", segundos, MessageBoxButtons.OK, DialogResult.OK);
-                grabarLog("Ocurrió un error al momento de guardar: "+e.Message);
-                enviarInforme(true,catalogo);
+                grabarLog("Ocurrió un error al momento de guardar: " + e.Message);
+                enviarInforme(true, catalogo);
             }
         }
         //////Menu
@@ -1479,11 +1491,11 @@ namespace SyncTAT
         {
             EnviarEmail email = new EnviarEmail();
             List<string> correos = new List<string>();
-            if(error)
-            correos.Add(set.ACorreo);
+            if (error)
+                correos.Add(set.ACorreo);
             else
-            correos.Add(set.ACorreoTS);
-            email.SendMail(correos, set.Puerto.ToString(), set.SSL, set.SMTP, set.DCorreo, set.Contrasenia, false, rutaL,error,catalogo);
+                correos.Add(set.ACorreoTS);
+            email.SendMail(correos, set.Puerto.ToString(), set.SSL, set.SMTP, set.DCorreo, set.Contrasenia, false, rutaL, error, catalogo);
         }
         private void crearLog()
         {
@@ -1505,7 +1517,7 @@ namespace SyncTAT
             {
                 System.IO.File.WriteAllText(rutaL, "SINCRONIZACIÓN:");
             }
-            
+
         }
         private void grabarLog(string text)
         {
