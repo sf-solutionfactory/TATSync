@@ -1,0 +1,1212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TAT004Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="VKORG" />
+            <PropertyRef Name="VTWEG" />
+            <PropertyRef Name="SPART" />
+            <PropertyRef Name="KUNNR" />
+          </Key>
+          <Property Name="VKORG" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="VTWEG" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="SPART" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="KUNNR" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAME1" Type="nvarchar" MaxLength="100" />
+          <Property Name="STCD1" Type="nvarchar" MaxLength="20" />
+          <Property Name="STCD2" Type="nvarchar" MaxLength="20" />
+          <Property Name="LAND" Type="nchar" MaxLength="2" />
+          <Property Name="REGION" Type="nvarchar" MaxLength="50" />
+          <Property Name="SUBREGION" Type="nvarchar" MaxLength="50" />
+          <Property Name="REGIO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ORT01" Type="nvarchar" MaxLength="50" />
+          <Property Name="STRAS_GP" Type="nvarchar" MaxLength="100" />
+          <Property Name="PSTLZ" Type="nvarchar" MaxLength="15" />
+          <Property Name="CONTAC" Type="nvarchar" MaxLength="100" />
+          <Property Name="CONT_EMAIL" Type="nvarchar" MaxLength="100" />
+          <Property Name="PARVW" Type="nvarchar" MaxLength="2" />
+          <Property Name="PAYER" Type="nchar" MaxLength="10" />
+          <Property Name="GRUPO" Type="nchar" MaxLength="10" />
+          <Property Name="SPRAS" Type="nchar" MaxLength="2" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+          <Property Name="BDESCRIPCION" Type="nchar" MaxLength="50" />
+          <Property Name="BANNER" Type="nchar" MaxLength="10" />
+          <Property Name="CANAL" Type="nchar" MaxLength="10" />
+          <Property Name="BZIRK" Type="nchar" MaxLength="6" />
+          <Property Name="KONDA" Type="nchar" MaxLength="2" />
+          <Property Name="VKGRP" Type="nchar" MaxLength="3" />
+          <Property Name="VKBUR" Type="nchar" MaxLength="4" />
+          <Property Name="BANNERG" Type="nchar" MaxLength="50" />
+          <Property Name="PROVEEDOR_ID" Type="nchar" MaxLength="10" />
+          <Property Name="USUARIO_ID" Type="nvarchar" MaxLength="16" />
+          <Property Name="EXPORTACION" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="CUENTAA">
+          <Key>
+            <PropertyRef Name="SOCIEDAD_ID" />
+            <PropertyRef Name="CLAVE" />
+            <PropertyRef Name="CUENTA_ID" />
+          </Key>
+          <Property Name="SOCIEDAD_ID" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="CLAVE" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="CUENTA_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="NOMBRE1" Type="nvarchar" MaxLength="20" />
+          <Property Name="NOMBRE2" Type="nvarchar" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" />
+        </EntityType>
+        <EntityType Name="CUENTAGL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" />
+        </EntityType>
+        <EntityType Name="IIMPUESTO">
+          <Key>
+            <PropertyRef Name="LAND" />
+            <PropertyRef Name="MWSKZ" />
+          </Key>
+          <Property Name="LAND" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="MWSKZ" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="KSCHL" Type="nchar" MaxLength="4" />
+          <Property Name="KBETR" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IMPUESTO">
+          <Key>
+            <PropertyRef Name="MWSKZ" />
+          </Key>
+          <Property Name="MWSKZ" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MATERIAL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="MTART" Type="nchar" MaxLength="4" />
+          <Property Name="MATKL_ID" Type="nvarchar" MaxLength="9" />
+          <Property Name="MAKTX" Type="nvarchar" MaxLength="50" />
+          <Property Name="MAKTG" Type="nvarchar" MaxLength="50" />
+          <Property Name="MEINS" Type="nchar" MaxLength="3" />
+          <Property Name="PUNIT" Type="decimal" Precision="13" Scale="5" />
+          <Property Name="ACTIVO" Type="bit" />
+          <Property Name="CTGR" Type="nvarchar" MaxLength="5" />
+          <Property Name="BRAND" Type="nvarchar" MaxLength="5" />
+          <Property Name="MATERIALGP_ID" Type="nchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="MATERIALGP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+          <Property Name="EXCLUIR" Type="bit" Nullable="false" />
+          <Property Name="UNICA" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MATERIALGPT">
+          <Key>
+            <PropertyRef Name="SPRAS_ID" />
+            <PropertyRef Name="MATERIALGP_ID" />
+          </Key>
+          <Property Name="SPRAS_ID" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="MATERIALGP_ID" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="TXT50" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MATERIALT">
+          <Key>
+            <PropertyRef Name="SPRAS" />
+            <PropertyRef Name="MATERIAL_ID" />
+          </Key>
+          <Property Name="SPRAS" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="MATERIAL_ID" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="MAKTX" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MAKTG" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MATERIALVKE">
+          <Key>
+            <PropertyRef Name="MATERIAL_ID" />
+            <PropertyRef Name="VKORG" />
+            <PropertyRef Name="VTWEG" />
+          </Key>
+          <Property Name="MATERIAL_ID" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="VKORG" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="VTWEG" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MONEDA">
+          <Key>
+            <PropertyRef Name="WAERS" />
+          </Key>
+          <Property Name="WAERS" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="ISOCD" Type="nchar" MaxLength="3" />
+          <Property Name="ALTWR" Type="nchar" MaxLength="3" />
+          <Property Name="LTEXT" Type="nvarchar" MaxLength="50" />
+          <Property Name="KTEXT" Type="nvarchar" MaxLength="15" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAIS">
+          <Key>
+            <PropertyRef Name="LAND" />
+          </Key>
+          <Property Name="LAND" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="SPRAS" Type="nchar" MaxLength="2" />
+          <Property Name="LANDX" Type="nvarchar" MaxLength="50" />
+          <Property Name="IMAGE" Type="nchar" MaxLength="6" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+          <Property Name="SOCIEDAD_ID" Type="nchar" MaxLength="4" />
+          <Property Name="DECIMAL" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="MILES" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="BACKORDER" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="250" />
+          <Property Name="SOCIEDAD_ID" Type="nchar" MaxLength="4" />
+          <Property Name="PAIS_ID" Type="nchar" MaxLength="2" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SOCIEDAD">
+          <Key>
+            <PropertyRef Name="BUKRS" />
+          </Key>
+          <Property Name="BUKRS" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="BUTXT" Type="nvarchar" MaxLength="50" />
+          <Property Name="ORT01" Type="nvarchar" MaxLength="50" />
+          <Property Name="LAND" Type="nchar" MaxLength="2" />
+          <Property Name="SUBREGIO" Type="nchar" MaxLength="6" />
+          <Property Name="WAERS" Type="nchar" MaxLength="3" />
+          <Property Name="SPRAS" Type="nchar" MaxLength="2" />
+          <Property Name="NAME1" Type="nvarchar" MaxLength="50" />
+          <Property Name="KTOPL" Type="nchar" MaxLength="10" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+          <Property Name="REGION" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TCAMBIO">
+          <Key>
+            <PropertyRef Name="KURST" />
+            <PropertyRef Name="FCURR" />
+            <PropertyRef Name="TCURR" />
+            <PropertyRef Name="GDATU" />
+          </Key>
+          <Property Name="KURST" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="FCURR" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="TCURR" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="GDATU" Type="date" Nullable="false" />
+          <Property Name="UKURS" Type="decimal" Precision="9" Scale="5" />
+        </EntityType>
+        <EntityType Name="UMEDIDA">
+          <Key>
+            <PropertyRef Name="MSEHI" />
+          </Key>
+          <Property Name="MSEHI" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" />
+        </EntityType>
+        <EntityType Name="UMEDIDAT">
+          <Key>
+            <PropertyRef Name="SPRAS_ID" />
+            <PropertyRef Name="MSEHI" />
+          </Key>
+          <Property Name="SPRAS_ID" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="MSEHI" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="MSEH3" Type="nchar" MaxLength="3" />
+          <Property Name="MSEH6" Type="nchar" MaxLength="6" />
+          <Property Name="MSEHT" Type="nvarchar" MaxLength="10" />
+          <Property Name="MSEHL" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK_CLIENTE_PAIS">
+          <End Role="PAIS" Type="Self.PAIS" Multiplicity="0..1" />
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAIS">
+              <PropertyRef Name="LAND" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="LAND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTE_PROVEEDOR">
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="0..1" />
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="PROVEEDOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IIMPUESTO_IMPUESTO">
+          <End Role="IMPUESTO" Type="Self.IMPUESTO" Multiplicity="1" />
+          <End Role="IIMPUESTO" Type="Self.IIMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMPUESTO">
+              <PropertyRef Name="MWSKZ" />
+            </Principal>
+            <Dependent Role="IIMPUESTO">
+              <PropertyRef Name="MWSKZ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IIMPUESTO_PAIS">
+          <End Role="PAIS" Type="Self.PAIS" Multiplicity="1" />
+          <End Role="IIMPUESTO" Type="Self.IIMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAIS">
+              <PropertyRef Name="LAND" />
+            </Principal>
+            <Dependent Role="IIMPUESTO">
+              <PropertyRef Name="LAND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MATERIAL_MATERIALGP">
+          <End Role="MATERIALGP" Type="Self.MATERIALGP" Multiplicity="0..1" />
+          <End Role="MATERIAL" Type="Self.MATERIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIALGP">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MATERIAL">
+              <PropertyRef Name="MATERIALGP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MATERIAL_UMEDIDA">
+          <End Role="UMEDIDA" Type="Self.UMEDIDA" Multiplicity="0..1" />
+          <End Role="MATERIAL" Type="Self.MATERIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UMEDIDA">
+              <PropertyRef Name="MSEHI" />
+            </Principal>
+            <Dependent Role="MATERIAL">
+              <PropertyRef Name="MEINS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MATERIALGPT_MATERIALGP">
+          <End Role="MATERIALGP" Type="Self.MATERIALGP" Multiplicity="1" />
+          <End Role="MATERIALGPT" Type="Self.MATERIALGPT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIALGP">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MATERIALGPT">
+              <PropertyRef Name="MATERIALGP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MATERIALT_MATERIAL">
+          <End Role="MATERIAL" Type="Self.MATERIAL" Multiplicity="1" />
+          <End Role="MATERIALT" Type="Self.MATERIALT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIAL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MATERIALT">
+              <PropertyRef Name="MATERIAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MATERIALVKE_MATERIAL">
+          <End Role="MATERIAL" Type="Self.MATERIAL" Multiplicity="1" />
+          <End Role="MATERIALVKE" Type="Self.MATERIALVKE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIAL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MATERIALVKE">
+              <PropertyRef Name="MATERIAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAIS_SOCIEDAD">
+          <End Role="SOCIEDAD" Type="Self.SOCIEDAD" Multiplicity="0..1" />
+          <End Role="PAIS" Type="Self.PAIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOCIEDAD">
+              <PropertyRef Name="BUKRS" />
+            </Principal>
+            <Dependent Role="PAIS">
+              <PropertyRef Name="SOCIEDAD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOCIEDAD_MONEDA">
+          <End Role="MONEDA" Type="Self.MONEDA" Multiplicity="0..1" />
+          <End Role="SOCIEDAD" Type="Self.SOCIEDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONEDA">
+              <PropertyRef Name="WAERS" />
+            </Principal>
+            <Dependent Role="SOCIEDAD">
+              <PropertyRef Name="WAERS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCAMBIO_MONEDA">
+          <End Role="MONEDA" Type="Self.MONEDA" Multiplicity="1" />
+          <End Role="TCAMBIO" Type="Self.TCAMBIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONEDA">
+              <PropertyRef Name="WAERS" />
+            </Principal>
+            <Dependent Role="TCAMBIO">
+              <PropertyRef Name="TCURR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCAMBIO_MONEDA1">
+          <End Role="MONEDA" Type="Self.MONEDA" Multiplicity="1" />
+          <End Role="TCAMBIO" Type="Self.TCAMBIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONEDA">
+              <PropertyRef Name="WAERS" />
+            </Principal>
+            <Dependent Role="TCAMBIO">
+              <PropertyRef Name="FCURR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UMEDIDAT_UMEDIDA">
+          <End Role="UMEDIDA" Type="Self.UMEDIDA" Multiplicity="1" />
+          <End Role="UMEDIDAT" Type="Self.UMEDIDAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UMEDIDA">
+              <PropertyRef Name="MSEHI" />
+            </Principal>
+            <Dependent Role="UMEDIDAT">
+              <PropertyRef Name="MSEHI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TAT004ModelStoreContainer">
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUENTAA" EntityType="Self.CUENTAA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUENTAGL" EntityType="Self.CUENTAGL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IIMPUESTO" EntityType="Self.IIMPUESTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IMPUESTO" EntityType="Self.IMPUESTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MATERIAL" EntityType="Self.MATERIAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MATERIALGP" EntityType="Self.MATERIALGP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MATERIALGPT" EntityType="Self.MATERIALGPT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MATERIALT" EntityType="Self.MATERIALT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MATERIALVKE" EntityType="Self.MATERIALVKE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MONEDA" EntityType="Self.MONEDA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SOCIEDAD" EntityType="Self.SOCIEDAD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TCAMBIO" EntityType="Self.TCAMBIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UMEDIDA" EntityType="Self.UMEDIDA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UMEDIDAT" EntityType="Self.UMEDIDAT" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CLIENTE_PAIS" Association="Self.FK_CLIENTE_PAIS">
+            <End Role="PAIS" EntitySet="PAIS" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTE_PROVEEDOR" Association="Self.FK_CLIENTE_PROVEEDOR">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IIMPUESTO_IMPUESTO" Association="Self.FK_IIMPUESTO_IMPUESTO">
+            <End Role="IMPUESTO" EntitySet="IMPUESTO" />
+            <End Role="IIMPUESTO" EntitySet="IIMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IIMPUESTO_PAIS" Association="Self.FK_IIMPUESTO_PAIS">
+            <End Role="PAIS" EntitySet="PAIS" />
+            <End Role="IIMPUESTO" EntitySet="IIMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MATERIAL_MATERIALGP" Association="Self.FK_MATERIAL_MATERIALGP">
+            <End Role="MATERIALGP" EntitySet="MATERIALGP" />
+            <End Role="MATERIAL" EntitySet="MATERIAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MATERIAL_UMEDIDA" Association="Self.FK_MATERIAL_UMEDIDA">
+            <End Role="UMEDIDA" EntitySet="UMEDIDA" />
+            <End Role="MATERIAL" EntitySet="MATERIAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MATERIALGPT_MATERIALGP" Association="Self.FK_MATERIALGPT_MATERIALGP">
+            <End Role="MATERIALGP" EntitySet="MATERIALGP" />
+            <End Role="MATERIALGPT" EntitySet="MATERIALGPT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MATERIALT_MATERIAL" Association="Self.FK_MATERIALT_MATERIAL">
+            <End Role="MATERIAL" EntitySet="MATERIAL" />
+            <End Role="MATERIALT" EntitySet="MATERIALT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MATERIALVKE_MATERIAL" Association="Self.FK_MATERIALVKE_MATERIAL">
+            <End Role="MATERIAL" EntitySet="MATERIAL" />
+            <End Role="MATERIALVKE" EntitySet="MATERIALVKE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAIS_SOCIEDAD" Association="Self.FK_PAIS_SOCIEDAD">
+            <End Role="SOCIEDAD" EntitySet="SOCIEDAD" />
+            <End Role="PAIS" EntitySet="PAIS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOCIEDAD_MONEDA" Association="Self.FK_SOCIEDAD_MONEDA">
+            <End Role="MONEDA" EntitySet="MONEDA" />
+            <End Role="SOCIEDAD" EntitySet="SOCIEDAD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCAMBIO_MONEDA" Association="Self.FK_TCAMBIO_MONEDA">
+            <End Role="MONEDA" EntitySet="MONEDA" />
+            <End Role="TCAMBIO" EntitySet="TCAMBIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCAMBIO_MONEDA1" Association="Self.FK_TCAMBIO_MONEDA1">
+            <End Role="MONEDA" EntitySet="MONEDA" />
+            <End Role="TCAMBIO" EntitySet="TCAMBIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UMEDIDAT_UMEDIDA" Association="Self.FK_UMEDIDAT_UMEDIDA">
+            <End Role="UMEDIDA" EntitySet="UMEDIDA" />
+            <End Role="UMEDIDAT" EntitySet="UMEDIDAT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TAT004Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MATERIAL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MTART" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="MATKL_ID" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="MAKTX" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MAKTG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MEINS" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="PUNIT" Type="Decimal" Precision="13" Scale="5" />
+          <Property Name="ACTIVO" Type="Boolean" />
+          <Property Name="CTGR" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="BRAND" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="MATERIALGP_ID" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="UMEDIDA" Relationship="TAT004Model.FK_MATERIAL_UMEDIDA" FromRole="MATERIAL" ToRole="UMEDIDA" />
+          <NavigationProperty Name="MATERIALT" Relationship="TAT004Model.FK_MATERIALT_MATERIAL" FromRole="MATERIAL" ToRole="MATERIALT" />
+          <NavigationProperty Name="MATERIALVKE" Relationship="TAT004Model.FK_MATERIALVKE_MATERIAL" FromRole="MATERIAL" ToRole="MATERIALVKE" />
+          <NavigationProperty Name="MATERIALGP" Relationship="TAT004Model.FK_MATERIAL_MATERIALGP" FromRole="MATERIAL" ToRole="MATERIALGP" />
+        </EntityType>
+        <EntityType Name="SOCIEDAD">
+          <Key>
+            <PropertyRef Name="BUKRS" />
+          </Key>
+          <Property Name="BUKRS" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="BUTXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ORT01" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LAND" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SUBREGIO" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="WAERS" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SPRAS" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="NAME1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KTOPL" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ACTIVO" Type="Boolean" Nullable="false" />
+          <Property Name="REGION" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="MONEDA" Relationship="TAT004Model.FK_SOCIEDAD_MONEDA" FromRole="SOCIEDAD" ToRole="MONEDA" />
+          <NavigationProperty Name="PAIS" Relationship="TAT004Model.FK_PAIS_SOCIEDAD" FromRole="SOCIEDAD" ToRole="PAIS" />
+        </EntityType>
+        <EntityType Name="TCAMBIO">
+          <Key>
+            <PropertyRef Name="KURST" />
+            <PropertyRef Name="FCURR" />
+            <PropertyRef Name="TCURR" />
+            <PropertyRef Name="GDATU" />
+          </Key>
+          <Property Name="KURST" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="FCURR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="TCURR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="GDATU" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UKURS" Type="Decimal" Precision="9" Scale="5" />
+          <NavigationProperty Name="MONEDA" Relationship="TAT004Model.FK_TCAMBIO_MONEDA" FromRole="TCAMBIO" ToRole="MONEDA" />
+          <NavigationProperty Name="MONEDA1" Relationship="TAT004Model.FK_TCAMBIO_MONEDA1" FromRole="TCAMBIO" ToRole="MONEDA" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MATERIAL" EntityType="Self.MATERIAL" />
+          <EntitySet Name="SOCIEDAD" EntityType="Self.SOCIEDAD" />
+          <EntitySet Name="TCAMBIO" EntityType="Self.TCAMBIO" />
+          <EntitySet Name="CLIENTE" EntityType="TAT004Model.CLIENTE" />
+          <EntitySet Name="IMPUESTO" EntityType="TAT004Model.IMPUESTO" />
+          <EntitySet Name="MONEDA" EntityType="TAT004Model.MONEDA" />
+          <EntitySet Name="PAIS" EntityType="TAT004Model.PAIS" />
+          <EntitySet Name="UMEDIDA" EntityType="TAT004Model.UMEDIDA" />
+          <AssociationSet Name="FK_CLIENTE_PAIS" Association="TAT004Model.FK_CLIENTE_PAIS">
+            <End Role="PAIS" EntitySet="PAIS" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MATERIAL_UMEDIDA" Association="TAT004Model.FK_MATERIAL_UMEDIDA">
+            <End Role="UMEDIDA" EntitySet="UMEDIDA" />
+            <End Role="MATERIAL" EntitySet="MATERIAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOCIEDAD_MONEDA" Association="TAT004Model.FK_SOCIEDAD_MONEDA">
+            <End Role="MONEDA" EntitySet="MONEDA" />
+            <End Role="SOCIEDAD" EntitySet="SOCIEDAD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCAMBIO_MONEDA" Association="TAT004Model.FK_TCAMBIO_MONEDA">
+            <End Role="MONEDA" EntitySet="MONEDA" />
+            <End Role="TCAMBIO" EntitySet="TCAMBIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCAMBIO_MONEDA1" Association="TAT004Model.FK_TCAMBIO_MONEDA1">
+            <End Role="MONEDA" EntitySet="MONEDA" />
+            <End Role="TCAMBIO" EntitySet="TCAMBIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAIS_SOCIEDAD" Association="TAT004Model.FK_PAIS_SOCIEDAD">
+            <End Role="SOCIEDAD" EntitySet="SOCIEDAD" />
+            <End Role="PAIS" EntitySet="PAIS" />
+          </AssociationSet>
+          <EntitySet Name="IIMPUESTO" EntityType="TAT004Model.IIMPUESTO" />
+          <EntitySet Name="MATERIALT" EntityType="TAT004Model.MATERIALT" />
+          <EntitySet Name="MATERIALVKE" EntityType="TAT004Model.MATERIALVKE" />
+          <EntitySet Name="PROVEEDOR" EntityType="TAT004Model.PROVEEDOR" />
+          <AssociationSet Name="FK_CLIENTE_PROVEEDOR" Association="TAT004Model.FK_CLIENTE_PROVEEDOR">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IIMPUESTO_IMPUESTO" Association="TAT004Model.FK_IIMPUESTO_IMPUESTO">
+            <End Role="IMPUESTO" EntitySet="IMPUESTO" />
+            <End Role="IIMPUESTO" EntitySet="IIMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IIMPUESTO_PAIS" Association="TAT004Model.FK_IIMPUESTO_PAIS">
+            <End Role="PAIS" EntitySet="PAIS" />
+            <End Role="IIMPUESTO" EntitySet="IIMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MATERIALT_MATERIAL" Association="TAT004Model.FK_MATERIALT_MATERIAL">
+            <End Role="MATERIAL" EntitySet="MATERIAL" />
+            <End Role="MATERIALT" EntitySet="MATERIALT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MATERIALVKE_MATERIAL" Association="TAT004Model.FK_MATERIALVKE_MATERIAL">
+            <End Role="MATERIAL" EntitySet="MATERIAL" />
+            <End Role="MATERIALVKE" EntitySet="MATERIALVKE" />
+          </AssociationSet>
+          <EntitySet Name="UMEDIDAT" EntityType="TAT004Model.UMEDIDAT" />
+          <AssociationSet Name="FK_UMEDIDAT_UMEDIDA" Association="TAT004Model.FK_UMEDIDAT_UMEDIDA">
+            <End Role="UMEDIDA" EntitySet="UMEDIDA" />
+            <End Role="UMEDIDAT" EntitySet="UMEDIDAT" />
+          </AssociationSet>
+          <EntitySet Name="MATERIALGP" EntityType="TAT004Model.MATERIALGP" />
+          <EntitySet Name="MATERIALGPT" EntityType="TAT004Model.MATERIALGPT" />
+          <AssociationSet Name="FK_MATERIAL_MATERIALGP" Association="TAT004Model.FK_MATERIAL_MATERIALGP">
+            <End Role="MATERIALGP" EntitySet="MATERIALGP" />
+            <End Role="MATERIAL" EntitySet="MATERIAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MATERIALGPT_MATERIALGP" Association="TAT004Model.FK_MATERIALGPT_MATERIALGP">
+            <End Role="MATERIALGP" EntitySet="MATERIALGP" />
+            <End Role="MATERIALGPT" EntitySet="MATERIALGPT" />
+          </AssociationSet>
+          <EntitySet Name="CUENTAGL" EntityType="TAT004Model.CUENTAGL" />
+          <EntitySet Name="CUENTAA" EntityType="TAT004Model.CUENTAA" />
+        </EntityContainer>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="VKORG" />
+            <PropertyRef Name="VTWEG" />
+            <PropertyRef Name="SPART" />
+            <PropertyRef Name="KUNNR" />
+          </Key>
+          <Property Name="VKORG" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="VTWEG" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SPART" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="KUNNR" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NAME1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="STCD1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="STCD2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LAND" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="REGION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SUBREGION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="REGIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ORT01" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="STRAS_GP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PSTLZ" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CONTAC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CONT_EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PARVW" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="PAYER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="GRUPO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SPRAS" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ACTIVO" Type="Boolean" Nullable="false" />
+          <Property Name="BDESCRIPCION" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="BANNER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CANAL" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BZIRK" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="KONDA" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="VKGRP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="VKBUR" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="BANNERG" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="PROVEEDOR_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="USUARIO_ID" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="EXPORTACION" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="PAIS" Relationship="TAT004Model.FK_CLIENTE_PAIS" FromRole="CLIENTE" ToRole="PAIS" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="TAT004Model.FK_CLIENTE_PROVEEDOR" FromRole="CLIENTE" ToRole="PROVEEDOR" />
+        </EntityType>
+        <EntityType Name="IMPUESTO">
+          <Key>
+            <PropertyRef Name="MWSKZ" />
+          </Key>
+          <Property Name="MWSKZ" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ACTIVO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="IIMPUESTO" Relationship="TAT004Model.FK_IIMPUESTO_IMPUESTO" FromRole="IMPUESTO" ToRole="IIMPUESTO" />
+        </EntityType>
+        <EntityType Name="MONEDA">
+          <Key>
+            <PropertyRef Name="WAERS" />
+          </Key>
+          <Property Name="WAERS" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="ISOCD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="ALTWR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="LTEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KTEXT" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ACTIVO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SOCIEDAD" Relationship="TAT004Model.FK_SOCIEDAD_MONEDA" FromRole="MONEDA" ToRole="SOCIEDAD" />
+          <NavigationProperty Name="TCAMBIO" Relationship="TAT004Model.FK_TCAMBIO_MONEDA" FromRole="MONEDA" ToRole="TCAMBIO" />
+          <NavigationProperty Name="TCAMBIO1" Relationship="TAT004Model.FK_TCAMBIO_MONEDA1" FromRole="MONEDA" ToRole="TCAMBIO" />
+        </EntityType>
+        <EntityType Name="PAIS">
+          <Key>
+            <PropertyRef Name="LAND" />
+          </Key>
+          <Property Name="LAND" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SPRAS" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="LANDX" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IMAGE" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="ACTIVO" Type="Boolean" Nullable="false" />
+          <Property Name="SOCIEDAD_ID" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="DECIMAL" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MILES" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="BACKORDER" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="TAT004Model.FK_CLIENTE_PAIS" FromRole="PAIS" ToRole="CLIENTE" />
+          <NavigationProperty Name="SOCIEDAD" Relationship="TAT004Model.FK_PAIS_SOCIEDAD" FromRole="PAIS" ToRole="SOCIEDAD" />
+          <NavigationProperty Name="IIMPUESTO" Relationship="TAT004Model.FK_IIMPUESTO_PAIS" FromRole="PAIS" ToRole="IIMPUESTO" />
+        </EntityType>
+        <EntityType Name="UMEDIDA">
+          <Key>
+            <PropertyRef Name="MSEHI" />
+          </Key>
+          <Property Name="MSEHI" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="ACTIVO" Type="Boolean" />
+          <NavigationProperty Name="MATERIAL" Relationship="TAT004Model.FK_MATERIAL_UMEDIDA" FromRole="UMEDIDA" ToRole="MATERIAL" />
+          <NavigationProperty Name="UMEDIDAT" Relationship="TAT004Model.FK_UMEDIDAT_UMEDIDA" FromRole="UMEDIDA" ToRole="UMEDIDAT" />
+        </EntityType>
+        <Association Name="FK_CLIENTE_PAIS">
+          <End Type="TAT004Model.PAIS" Role="PAIS" Multiplicity="0..1" />
+          <End Type="TAT004Model.CLIENTE" Role="CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAIS">
+              <PropertyRef Name="LAND" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="LAND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MATERIAL_UMEDIDA">
+          <End Type="TAT004Model.UMEDIDA" Role="UMEDIDA" Multiplicity="0..1" />
+          <End Type="TAT004Model.MATERIAL" Role="MATERIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UMEDIDA">
+              <PropertyRef Name="MSEHI" />
+            </Principal>
+            <Dependent Role="MATERIAL">
+              <PropertyRef Name="MEINS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOCIEDAD_MONEDA">
+          <End Type="TAT004Model.MONEDA" Role="MONEDA" Multiplicity="0..1" />
+          <End Type="TAT004Model.SOCIEDAD" Role="SOCIEDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONEDA">
+              <PropertyRef Name="WAERS" />
+            </Principal>
+            <Dependent Role="SOCIEDAD">
+              <PropertyRef Name="WAERS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCAMBIO_MONEDA">
+          <End Type="TAT004Model.MONEDA" Role="MONEDA" Multiplicity="1" />
+          <End Type="TAT004Model.TCAMBIO" Role="TCAMBIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONEDA">
+              <PropertyRef Name="WAERS" />
+            </Principal>
+            <Dependent Role="TCAMBIO">
+              <PropertyRef Name="TCURR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCAMBIO_MONEDA1">
+          <End Type="TAT004Model.MONEDA" Role="MONEDA" Multiplicity="1" />
+          <End Type="TAT004Model.TCAMBIO" Role="TCAMBIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONEDA">
+              <PropertyRef Name="WAERS" />
+            </Principal>
+            <Dependent Role="TCAMBIO">
+              <PropertyRef Name="FCURR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAIS_SOCIEDAD">
+          <End Type="TAT004Model.SOCIEDAD" Role="SOCIEDAD" Multiplicity="0..1" />
+          <End Type="TAT004Model.PAIS" Role="PAIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOCIEDAD">
+              <PropertyRef Name="BUKRS" />
+            </Principal>
+            <Dependent Role="PAIS">
+              <PropertyRef Name="SOCIEDAD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="IIMPUESTO">
+          <Key>
+            <PropertyRef Name="LAND" />
+            <PropertyRef Name="MWSKZ" />
+          </Key>
+          <Property Name="LAND" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MWSKZ" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="KSCHL" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="KBETR" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="ACTIVO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="IMPUESTO" Relationship="TAT004Model.FK_IIMPUESTO_IMPUESTO" FromRole="IIMPUESTO" ToRole="IMPUESTO" />
+          <NavigationProperty Name="PAIS" Relationship="TAT004Model.FK_IIMPUESTO_PAIS" FromRole="IIMPUESTO" ToRole="PAIS" />
+        </EntityType>
+        <EntityType Name="MATERIALT">
+          <Key>
+            <PropertyRef Name="SPRAS" />
+            <PropertyRef Name="MATERIAL_ID" />
+          </Key>
+          <Property Name="SPRAS" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MATERIAL_ID" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="true" />
+          <Property Name="MAKTX" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MAKTG" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MATERIAL" Relationship="TAT004Model.FK_MATERIALT_MATERIAL" FromRole="MATERIALT" ToRole="MATERIAL" />
+        </EntityType>
+        <EntityType Name="MATERIALVKE">
+          <Key>
+            <PropertyRef Name="MATERIAL_ID" />
+            <PropertyRef Name="VKORG" />
+            <PropertyRef Name="VTWEG" />
+          </Key>
+          <Property Name="MATERIAL_ID" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="true" />
+          <Property Name="VKORG" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="VTWEG" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="ACTIVO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MATERIAL" Relationship="TAT004Model.FK_MATERIALVKE_MATERIAL" FromRole="MATERIALVKE" ToRole="MATERIAL" />
+        </EntityType>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NOMBRE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="SOCIEDAD_ID" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="PAIS_ID" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ACTIVO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="TAT004Model.FK_CLIENTE_PROVEEDOR" FromRole="PROVEEDOR" ToRole="CLIENTE" />
+        </EntityType>
+        <Association Name="FK_CLIENTE_PROVEEDOR">
+          <End Type="TAT004Model.PROVEEDOR" Role="PROVEEDOR" Multiplicity="0..1" />
+          <End Type="TAT004Model.CLIENTE" Role="CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="PROVEEDOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IIMPUESTO_IMPUESTO">
+          <End Type="TAT004Model.IMPUESTO" Role="IMPUESTO" Multiplicity="1" />
+          <End Type="TAT004Model.IIMPUESTO" Role="IIMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMPUESTO">
+              <PropertyRef Name="MWSKZ" />
+            </Principal>
+            <Dependent Role="IIMPUESTO">
+              <PropertyRef Name="MWSKZ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IIMPUESTO_PAIS">
+          <End Type="TAT004Model.PAIS" Role="PAIS" Multiplicity="1" />
+          <End Type="TAT004Model.IIMPUESTO" Role="IIMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAIS">
+              <PropertyRef Name="LAND" />
+            </Principal>
+            <Dependent Role="IIMPUESTO">
+              <PropertyRef Name="LAND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MATERIALT_MATERIAL">
+          <End Type="TAT004Model.MATERIAL" Role="MATERIAL" Multiplicity="1" />
+          <End Type="TAT004Model.MATERIALT" Role="MATERIALT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIAL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MATERIALT">
+              <PropertyRef Name="MATERIAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MATERIALVKE_MATERIAL">
+          <End Type="TAT004Model.MATERIAL" Role="MATERIAL" Multiplicity="1" />
+          <End Type="TAT004Model.MATERIALVKE" Role="MATERIALVKE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIAL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MATERIALVKE">
+              <PropertyRef Name="MATERIAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UMEDIDAT">
+          <Key>
+            <PropertyRef Name="SPRAS_ID" />
+            <PropertyRef Name="MSEHI" />
+          </Key>
+          <Property Name="SPRAS_ID" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MSEHI" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="MSEH3" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="MSEH6" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="MSEHT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MSEHL" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UMEDIDA" Relationship="TAT004Model.FK_UMEDIDAT_UMEDIDA" FromRole="UMEDIDAT" ToRole="UMEDIDA" />
+        </EntityType>
+        <Association Name="FK_UMEDIDAT_UMEDIDA">
+          <End Type="TAT004Model.UMEDIDA" Role="UMEDIDA" Multiplicity="1" />
+          <End Type="TAT004Model.UMEDIDAT" Role="UMEDIDAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UMEDIDA">
+              <PropertyRef Name="MSEHI" />
+            </Principal>
+            <Dependent Role="UMEDIDAT">
+              <PropertyRef Name="MSEHI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MATERIALGP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ACTIVO" Type="Boolean" Nullable="false" />
+          <Property Name="EXCLUIR" Type="Boolean" Nullable="false" />
+          <Property Name="UNICA" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MATERIAL" Relationship="TAT004Model.FK_MATERIAL_MATERIALGP" FromRole="MATERIALGP" ToRole="MATERIAL" />
+          <NavigationProperty Name="MATERIALGPT" Relationship="TAT004Model.FK_MATERIALGPT_MATERIALGP" FromRole="MATERIALGP" ToRole="MATERIALGPT" />
+        </EntityType>
+        <EntityType Name="MATERIALGPT">
+          <Key>
+            <PropertyRef Name="SPRAS_ID" />
+            <PropertyRef Name="MATERIALGP_ID" />
+          </Key>
+          <Property Name="SPRAS_ID" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MATERIALGP_ID" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="TXT50" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MATERIALGP" Relationship="TAT004Model.FK_MATERIALGPT_MATERIALGP" FromRole="MATERIALGPT" ToRole="MATERIALGP" />
+        </EntityType>
+        <Association Name="FK_MATERIAL_MATERIALGP">
+          <End Type="TAT004Model.MATERIALGP" Role="MATERIALGP" Multiplicity="0..1" />
+          <End Type="TAT004Model.MATERIAL" Role="MATERIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIALGP">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MATERIAL">
+              <PropertyRef Name="MATERIALGP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MATERIALGPT_MATERIALGP">
+          <End Type="TAT004Model.MATERIALGP" Role="MATERIALGP" Multiplicity="1" />
+          <End Type="TAT004Model.MATERIALGPT" Role="MATERIALGPT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIALGP">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MATERIALGPT">
+              <PropertyRef Name="MATERIALGP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CUENTAGL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ACTIVO" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CUENTAA">
+          <Key>
+            <PropertyRef Name="SOCIEDAD_ID" />
+            <PropertyRef Name="CLAVE" />
+            <PropertyRef Name="CUENTA_ID" />
+          </Key>
+          <Property Name="SOCIEDAD_ID" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="CLAVE" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="CUENTA_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NOMBRE1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRE2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ACTIVO" Type="Boolean" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TAT004ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="MATERIAL">
+            <EntityTypeMapping TypeName="TAT004Model.MATERIAL">
+              <MappingFragment StoreEntitySet="MATERIAL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MTART" ColumnName="MTART" />
+                <ScalarProperty Name="MATKL_ID" ColumnName="MATKL_ID" />
+                <ScalarProperty Name="MAKTX" ColumnName="MAKTX" />
+                <ScalarProperty Name="MAKTG" ColumnName="MAKTG" />
+                <ScalarProperty Name="MEINS" ColumnName="MEINS" />
+                <ScalarProperty Name="PUNIT" ColumnName="PUNIT" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="CTGR" ColumnName="CTGR" />
+                <ScalarProperty Name="BRAND" ColumnName="BRAND" />
+                <ScalarProperty Name="MATERIALGP_ID" ColumnName="MATERIALGP_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOCIEDAD">
+            <EntityTypeMapping TypeName="TAT004Model.SOCIEDAD">
+              <MappingFragment StoreEntitySet="SOCIEDAD">
+                <ScalarProperty Name="BUKRS" ColumnName="BUKRS" />
+                <ScalarProperty Name="BUTXT" ColumnName="BUTXT" />
+                <ScalarProperty Name="ORT01" ColumnName="ORT01" />
+                <ScalarProperty Name="LAND" ColumnName="LAND" />
+                <ScalarProperty Name="SUBREGIO" ColumnName="SUBREGIO" />
+                <ScalarProperty Name="WAERS" ColumnName="WAERS" />
+                <ScalarProperty Name="SPRAS" ColumnName="SPRAS" />
+                <ScalarProperty Name="NAME1" ColumnName="NAME1" />
+                <ScalarProperty Name="KTOPL" ColumnName="KTOPL" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TCAMBIO">
+            <EntityTypeMapping TypeName="TAT004Model.TCAMBIO">
+              <MappingFragment StoreEntitySet="TCAMBIO">
+                <ScalarProperty Name="KURST" ColumnName="KURST" />
+                <ScalarProperty Name="FCURR" ColumnName="FCURR" />
+                <ScalarProperty Name="TCURR" ColumnName="TCURR" />
+                <ScalarProperty Name="GDATU" ColumnName="GDATU" />
+                <ScalarProperty Name="UKURS" ColumnName="UKURS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="TAT004Model.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="EXPORTACION" ColumnName="EXPORTACION" />
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="PROVEEDOR_ID" ColumnName="PROVEEDOR_ID" />
+                <ScalarProperty Name="BANNERG" ColumnName="BANNERG" />
+                <ScalarProperty Name="VKBUR" ColumnName="VKBUR" />
+                <ScalarProperty Name="VKGRP" ColumnName="VKGRP" />
+                <ScalarProperty Name="KONDA" ColumnName="KONDA" />
+                <ScalarProperty Name="BZIRK" ColumnName="BZIRK" />
+                <ScalarProperty Name="CANAL" ColumnName="CANAL" />
+                <ScalarProperty Name="BANNER" ColumnName="BANNER" />
+                <ScalarProperty Name="BDESCRIPCION" ColumnName="BDESCRIPCION" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="SPRAS" ColumnName="SPRAS" />
+                <ScalarProperty Name="GRUPO" ColumnName="GRUPO" />
+                <ScalarProperty Name="PAYER" ColumnName="PAYER" />
+                <ScalarProperty Name="PARVW" ColumnName="PARVW" />
+                <ScalarProperty Name="CONT_EMAIL" ColumnName="CONT_EMAIL" />
+                <ScalarProperty Name="CONTAC" ColumnName="CONTAC" />
+                <ScalarProperty Name="PSTLZ" ColumnName="PSTLZ" />
+                <ScalarProperty Name="STRAS_GP" ColumnName="STRAS_GP" />
+                <ScalarProperty Name="ORT01" ColumnName="ORT01" />
+                <ScalarProperty Name="REGIO" ColumnName="REGIO" />
+                <ScalarProperty Name="SUBREGION" ColumnName="SUBREGION" />
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+                <ScalarProperty Name="LAND" ColumnName="LAND" />
+                <ScalarProperty Name="STCD2" ColumnName="STCD2" />
+                <ScalarProperty Name="STCD1" ColumnName="STCD1" />
+                <ScalarProperty Name="NAME1" ColumnName="NAME1" />
+                <ScalarProperty Name="KUNNR" ColumnName="KUNNR" />
+                <ScalarProperty Name="SPART" ColumnName="SPART" />
+                <ScalarProperty Name="VTWEG" ColumnName="VTWEG" />
+                <ScalarProperty Name="VKORG" ColumnName="VKORG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IMPUESTO">
+            <EntityTypeMapping TypeName="TAT004Model.IMPUESTO">
+              <MappingFragment StoreEntitySet="IMPUESTO">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="MWSKZ" ColumnName="MWSKZ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MONEDA">
+            <EntityTypeMapping TypeName="TAT004Model.MONEDA">
+              <MappingFragment StoreEntitySet="MONEDA">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="KTEXT" ColumnName="KTEXT" />
+                <ScalarProperty Name="LTEXT" ColumnName="LTEXT" />
+                <ScalarProperty Name="ALTWR" ColumnName="ALTWR" />
+                <ScalarProperty Name="ISOCD" ColumnName="ISOCD" />
+                <ScalarProperty Name="WAERS" ColumnName="WAERS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAIS">
+            <EntityTypeMapping TypeName="TAT004Model.PAIS">
+              <MappingFragment StoreEntitySet="PAIS">
+                <ScalarProperty Name="BACKORDER" ColumnName="BACKORDER" />
+                <ScalarProperty Name="MILES" ColumnName="MILES" />
+                <ScalarProperty Name="DECIMAL" ColumnName="DECIMAL" />
+                <ScalarProperty Name="SOCIEDAD_ID" ColumnName="SOCIEDAD_ID" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
+                <ScalarProperty Name="LANDX" ColumnName="LANDX" />
+                <ScalarProperty Name="SPRAS" ColumnName="SPRAS" />
+                <ScalarProperty Name="LAND" ColumnName="LAND" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UMEDIDA">
+            <EntityTypeMapping TypeName="TAT004Model.UMEDIDA">
+              <MappingFragment StoreEntitySet="UMEDIDA">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="MSEHI" ColumnName="MSEHI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IIMPUESTO">
+            <EntityTypeMapping TypeName="TAT004Model.IIMPUESTO">
+              <MappingFragment StoreEntitySet="IIMPUESTO">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="KBETR" ColumnName="KBETR" />
+                <ScalarProperty Name="KSCHL" ColumnName="KSCHL" />
+                <ScalarProperty Name="MWSKZ" ColumnName="MWSKZ" />
+                <ScalarProperty Name="LAND" ColumnName="LAND" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MATERIALT">
+            <EntityTypeMapping TypeName="TAT004Model.MATERIALT">
+              <MappingFragment StoreEntitySet="MATERIALT">
+                <ScalarProperty Name="MAKTG" ColumnName="MAKTG" />
+                <ScalarProperty Name="MAKTX" ColumnName="MAKTX" />
+                <ScalarProperty Name="MATERIAL_ID" ColumnName="MATERIAL_ID" />
+                <ScalarProperty Name="SPRAS" ColumnName="SPRAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MATERIALVKE">
+            <EntityTypeMapping TypeName="TAT004Model.MATERIALVKE">
+              <MappingFragment StoreEntitySet="MATERIALVKE">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="VTWEG" ColumnName="VTWEG" />
+                <ScalarProperty Name="VKORG" ColumnName="VKORG" />
+                <ScalarProperty Name="MATERIAL_ID" ColumnName="MATERIAL_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVEEDOR">
+            <EntityTypeMapping TypeName="TAT004Model.PROVEEDOR">
+              <MappingFragment StoreEntitySet="PROVEEDOR">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="PAIS_ID" ColumnName="PAIS_ID" />
+                <ScalarProperty Name="SOCIEDAD_ID" ColumnName="SOCIEDAD_ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UMEDIDAT">
+            <EntityTypeMapping TypeName="TAT004Model.UMEDIDAT">
+              <MappingFragment StoreEntitySet="UMEDIDAT">
+                <ScalarProperty Name="MSEHL" ColumnName="MSEHL" />
+                <ScalarProperty Name="MSEHT" ColumnName="MSEHT" />
+                <ScalarProperty Name="MSEH6" ColumnName="MSEH6" />
+                <ScalarProperty Name="MSEH3" ColumnName="MSEH3" />
+                <ScalarProperty Name="MSEHI" ColumnName="MSEHI" />
+                <ScalarProperty Name="SPRAS_ID" ColumnName="SPRAS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MATERIALGP">
+            <EntityTypeMapping TypeName="TAT004Model.MATERIALGP">
+              <MappingFragment StoreEntitySet="MATERIALGP">
+                <ScalarProperty Name="UNICA" ColumnName="UNICA" />
+                <ScalarProperty Name="EXCLUIR" ColumnName="EXCLUIR" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MATERIALGPT">
+            <EntityTypeMapping TypeName="TAT004Model.MATERIALGPT">
+              <MappingFragment StoreEntitySet="MATERIALGPT">
+                <ScalarProperty Name="TXT50" ColumnName="TXT50" />
+                <ScalarProperty Name="MATERIALGP_ID" ColumnName="MATERIALGP_ID" />
+                <ScalarProperty Name="SPRAS_ID" ColumnName="SPRAS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUENTAGL">
+            <EntityTypeMapping TypeName="TAT004Model.CUENTAGL">
+              <MappingFragment StoreEntitySet="CUENTAGL">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUENTAA">
+            <EntityTypeMapping TypeName="TAT004Model.CUENTAA">
+              <MappingFragment StoreEntitySet="CUENTAA">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE2" ColumnName="NOMBRE2" />
+                <ScalarProperty Name="NOMBRE1" ColumnName="NOMBRE1" />
+                <ScalarProperty Name="CUENTA_ID" ColumnName="CUENTA_ID" />
+                <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
+                <ScalarProperty Name="SOCIEDAD_ID" ColumnName="SOCIEDAD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
